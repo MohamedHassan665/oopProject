@@ -43,7 +43,8 @@ public class Oop_project {
                     } else if (answer2 == 2) {
                         System.out.println("Enter The Name Of The column ");
                         String col = input.next();
-                        if (col.equals("player_name")) {
+                        col=col.toLowerCase();
+                        if (col.charAt(0)=='n'&&col.charAt(0)=='a') {
                             System.out.println("Enter New Name ");
                             String New_Name = input.next();
                             System.out.println("Enter Team Name ");
@@ -51,7 +52,7 @@ public class Oop_project {
                             System.out.println("Enter id of Player ");
                             int id = input.nextInt();
                             admin.update_Player(id, New_Name, Team_Name);
-                        } else if (col.equals("player_height")) {
+                        } else if (col.charAt(0)=='h') {
                             System.out.println("Enter New Height ");
                             float New_height = input.nextFloat();
                             System.out.println("Enter Team Name ");
@@ -59,7 +60,7 @@ public class Oop_project {
                             System.out.println("Enter id of Player ");
                             int id = input.nextInt();
                             admin.update_Player(New_height, id, Team_Name);
-                        } else if (col.equals("player_weight")) {
+                        } else if (col.charAt(0)=='w') {
                             System.out.println("Enter New weight ");
                             float New_weight = input.nextFloat();
                             System.out.println("Enter Team Name ");
@@ -67,7 +68,7 @@ public class Oop_project {
                             System.out.println("Enter id of Player ");
                             int id = input.nextInt();
                             admin.update_Player(id, Team_Name, New_weight);
-                        } else if (col.equals("Team_Name")) {
+                        } else if (col.charAt(0)=='t') {
                             System.out.println("Enter New Team ");
                             String New_Team = input.next();
                             System.out.println("Enter old Team Name ");
@@ -75,7 +76,7 @@ public class Oop_project {
                             System.out.println("Enter id of Player ");
                             int id = input.nextInt();
                             admin.update_Player(New_Team, id, Team_Name);
-                        } else if (col.equals("player_num")) {
+                        } else if (col.charAt(0)=='n') {
                             System.out.println("Enter New id ");
                             int New_id = input.nextInt();
                             System.out.println("Enter Team Name ");
@@ -131,7 +132,7 @@ public class Oop_project {
                     } else if (answer2 == 2) {
                         admin.update_team();
                     } else if (answer2 == 3) {
-                        System.out.println("Enter The Team ");
+                        System.out.println("Enter The Team Name ");
                         String team = input.next();
                         admin.delete_team(team);
                     }
@@ -141,8 +142,9 @@ public class Oop_project {
                     System.out.println("Delete Stadium  Enter 3");
                     int answer2 = input.nextInt();
                     if (answer2 == 1) {
+                        input.nextLine();
                         System.out.println("Enter Name Of stadium");
-                        String name = input.next();
+                        String name = input.nextLine();
                         System.out.println("Enter Capicty of Stadium");
                         int capicty = input.nextInt();
                         System.out.println("Enter Loction of The Stadium");

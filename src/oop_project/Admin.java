@@ -144,8 +144,9 @@ public class Admin
                 System.out.println("Enter Old Value ");
                 input.nextLine();
                 String Old_Value = input.nextLine();
-                System.out.println("Enter New Value Of");
-                String New_Value = input.next();
+               // input.nextLine();
+                System.out.println("Enter New Value Of stadium name");
+                String New_Value = input.nextLine();
                 query = "select * from stadium where Stadium_Name='" + Old_Value + "'";
                 resultSet = statement.executeQuery(query);
                 resultSet.next();
@@ -171,8 +172,9 @@ public class Admin
     {
         try
         {
+           // input.nextLine();
             System.out.println("Enter The Name Of The Stadium");
-            String Stadium_Name = input.next();
+            String Stadium_Name = input.nextLine();
             statement.execute("update matche set stadename=NULL where stadename='" + Stadium_Name + "'");
             statement.execute("delete from  stadium  where Stadium_Name='" + Stadium_Name + "'");
         }
@@ -189,7 +191,7 @@ public class Admin
         {
             System.out.println("please enter id of match you want to delete");
             int id = input.nextInt();
-            query2 = "delete from matche where Match_id='" + id + "'";
+            query2 = "delete from matche where Match_id='" +id+"'";
             statement.execute(query2);
         }
         catch (SQLException se)
@@ -478,17 +480,40 @@ public class Admin
     {
         try
         {
+            System.out.println("if you want to modify column");
+            System.out.println("Team Entre 1");
+            System.out.println("LeagueNumber Entre 2");
+            String result=input.next();
+             String team;
+            if(result.charAt(0)=='1')
+            {
+           
             System.out.println("please enter the new name of team");
             String new_name = input.next();
             System.out.println("please enter the old name of team");
-            String team = input.next();
-            query2 = "insert into team values('" + new_name + "')";
+            team = input.next();
+            resultSet = statement.executeQuery("select * from team where Team_name='"+team+"'");
+            resultSet.next();
+            query2 = "insert into team values('" +new_name+ "','"+resultSet.getInt("LeagueNumber")+"')";
             statement.execute(query2);
             query2 = "update matche set Frist_Team= '" + new_name + "' where Frist_Team='" + team + "' ";
             statement.execute(query2);
             query2 = "update matche set Second_Team= '" + new_name + "' where Second_Team='" + team + "' ";
             statement.execute(query2);
-            delete_team(team);
+            query2 = "update player set Teame_name= '" + new_name + "'";
+            statement.execute(query2);
+            delete_team(team); 
+            }
+            else if(result.charAt(0)=='2')
+            {
+            System.out.println("Enter new LeagueNumber");
+            int legNumber=input.nextInt();
+             System.out.println("please enter the old name of team");
+             team = input.next();
+            query2 = "update team set LeagueNumber= '"+legNumber+"' where Team_name='" + team + "' ";
+            statement.execute(query2);
+            }
+            
         }
         catch (SQLException se)
         {
@@ -501,9 +526,9 @@ public class Admin
     {
         try
         {
-            query2 = "delete from team where Team_name='" + team + "'";
+            query2 = "delete from matche where Frist_Team='" +team+ "' OR Second_Team='" +team+ "'"; 
             statement.execute(query2);
-            query2 = "delete from matche where Frist_Team='" + team + "' OR Second_Team='" + team + "'";
+            query2 = "delete from team where Team_name='" +team+ "'";
             statement.execute(query2);
         }
         catch (SQLException se)
